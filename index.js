@@ -24,6 +24,9 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+// Array for urls
+const urls = [];
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
