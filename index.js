@@ -27,6 +27,13 @@ app.get('/api/hello', function(req, res) {
 // Array for urls
 const urls = [];
 
+// POST for shorturl
+app.post('/api/shorturl', (req, res) => {
+  let url = req.body.url.replace(/\/*$/, '');
+  console.log(url);
+  });
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
