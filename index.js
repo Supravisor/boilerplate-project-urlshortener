@@ -29,7 +29,7 @@ const urls = [];
 
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
-  let url = req.body.url.replace(/\/*$/, '');
+  let url = req.body.url;
   console.log(url);
   });
 });
