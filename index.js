@@ -25,12 +25,19 @@ app.get('/api/hello', function(req, res) {
 });
 
 // Array for urls
-const urls = [];
+let urls = [];
+let counter = 0;
 
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
   let url = req.body.url;
-  console.log(url);
+  if (!urls.includes(url)) {
+    urls.push(url);
+    res.json( {
+      original_url: url,
+      short_url: counter + 1;
+    } )
+  }
 });
 
 app.get('/api/shorturl/:number', (req, res) => {
