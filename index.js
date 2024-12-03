@@ -31,7 +31,6 @@ const urls = [];
 app.post('/api/shorturl', (req, res) => {
   let url = req.body.url;
   console.log(url);
-  });
 });
 
 app.listen(port, function() {
