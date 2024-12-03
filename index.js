@@ -31,13 +31,19 @@ let counter = 0;
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
   let url = req.body.url;
-  if (!urls.includes(url)) {
-    urls.push(url);
-    res.json( {
-      original_url: url,
-      short_url: counter + 1
-    } )
-  }
+  dns.lookup(url, (err, address, family) => {
+    if (err) {
+      res.json({ error: 'invalid url' })
+    }
+    else {
+      if (!urls.includes(url)) {
+        urls.push(url);
+      }
+      res.json({
+        original_url: url,
+        short_url: counter + 1
+      });
+    }
 });
 
 app.get('/api/shorturl/:number', (req, res) => {
