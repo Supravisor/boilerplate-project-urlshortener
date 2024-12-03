@@ -29,8 +29,8 @@ let urls = [];
 
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
-  let url = req.body.url;
-  dns.lookup(url.replace(/^https:\/\/(www.)?/, ''), (err, address, family) => {
+  dns.lookup(new URL(req.body.url).hostname, (err, address, family) => {
+  
     if (err) {
       res.json({ error: 'invalid url' })
     }
