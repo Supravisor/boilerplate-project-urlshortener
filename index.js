@@ -33,6 +33,11 @@ app.post('/api/shorturl', (req, res) => {
   console.log(url);
 });
 
+app.get('/api/shorturl/:number', (req, res) => {
+  const externarlUrl = urls[req.params.number - 1];
+  res.redirect(urls[req.params.number - 1]);
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
