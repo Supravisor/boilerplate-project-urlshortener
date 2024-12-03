@@ -30,31 +30,29 @@ let urls = [];
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
   let url = req.body.url;
-  dns.lookup(url, (err, address, family) => {
+  dns.lookup(url.replace(/^https:\/\/(www.)?/, ''), (err, address, family) => {
     if (err) {
       res.json({ error: 'invalid url' })
     }
     else {
       if (!urls.includes(url)) {
         urls.push(url);
+      } else {
+        res.json({ original_url: url, short_url: urls.length });
       }
-      res.json({
-        original_url: url,
-        short_url: urls.length + 1
-      });
     }
   })
 });
 
 app.get('/api/shorturl/:number', (req, res) => {
-  console.log(urls);
-  if (urls.length >= req.params.number) {
-    console.log("redirect");
-    res.redirect(urls[req.params.number - 1]);
-  } else {
-    console.log("error");
+  try {
+    if (req.params.number <= urls.length) {
+      res.redirect(urls[req.params.number - 1]);
+    }
+  } catch (error) {
     res.json({ "error": "Invalid number" })
   }
+
 });
 
 app.listen(port, function() {
