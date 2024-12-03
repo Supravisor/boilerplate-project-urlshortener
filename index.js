@@ -41,7 +41,14 @@ app.post('/api/shorturl', (req, res) => {
 });
 
 app.get('/api/shorturl/:number', (req, res) => {
-  res.redirect(urls[req.params.number - 1]);
+  console.log(urls);
+  if (urls.length > req.params.number) {
+    console.log("redirect");
+    res.redirect(urls[req.params.number - 1]);
+  } else {
+    console.log("error");
+    res.json({ "error": "Invalid number" })
+  }
 });
 
 app.listen(port, function() {
