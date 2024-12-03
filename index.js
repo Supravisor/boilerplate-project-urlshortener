@@ -26,7 +26,6 @@ app.get('/api/hello', function(req, res) {
 
 // Array for urls
 let urls = [];
-let counter = 0;
 
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
@@ -41,14 +40,15 @@ app.post('/api/shorturl', (req, res) => {
       }
       res.json({
         original_url: url,
-        short_url: counter + 1
+        short_url: urls.length + 1
       });
     }
+  })
 });
 
 app.get('/api/shorturl/:number', (req, res) => {
   console.log(urls);
-  if (urls.length > req.params.number) {
+  if (urls.length >= req.params.number) {
     console.log("redirect");
     res.redirect(urls[req.params.number - 1]);
   } else {
