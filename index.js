@@ -35,13 +35,12 @@ app.post('/api/shorturl', (req, res) => {
     urls.push(url);
     res.json( {
       original_url: url,
-      short_url: counter + 1;
+      short_url: counter + 1
     } )
   }
 });
 
 app.get('/api/shorturl/:number', (req, res) => {
-  const externarlUrl = urls[req.params.number - 1];
   res.redirect(urls[req.params.number - 1]);
 });
 
