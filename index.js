@@ -29,15 +29,14 @@ let urls = [];
 
 // POST for shorturl
 app.post('/api/shorturl', (req, res) => {
-  dns.lookup(new URL(req.body.url).hostname, (err, address, family) => {
-  
+  let url = req.body.url;
+  dns.lookup(new URL(url).hostname, (err, address, family) => {
     if (err) {
       res.json({ error: 'invalid url' })
     }
     else {
       if (!urls.includes(url)) {
         urls.push(url);
-      } else {
         res.json({ original_url: url, short_url: urls.length });
       }
     }
