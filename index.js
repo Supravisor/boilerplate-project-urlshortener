@@ -24,6 +24,7 @@ app.get('/api/hello', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
+<br />
 // Array for urls
 let urls = [];
 
@@ -41,17 +42,17 @@ app.post('/api/shorturl', (req, res) => {
       }
     }
   })
+
 });
 
-app.get('/api/shorturl/:number', (req, res) => {
+app.get('/api/shorturl/:index', (req, res) => {
   try {
-    if (req.params.number <= urls.length) {
-      res.redirect(urls[req.params.number - 1]);
+    if (req.params.index <= urls.length) {
+      res.redirect(urls[req.params.index - 1]);
     }
   } catch (error) {
     res.json({ "error": "Invalid number" })
   }
-
 });
 
 app.listen(port, function() {
